@@ -8,6 +8,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +37,7 @@ public class BooardController {
 //		return board;	
 //	}
 //	
+	
 	// 페이지 요청
 	@GetMapping("/saveForm")
 	public String saveForm() { 
@@ -49,4 +51,14 @@ public class BooardController {
 		boardService.글쓰기(dto);
 		return "ok";
 	}
+	
+	@GetMapping("/board/{id}")
+	public String detail(@PathVariable int id, Model model) {
+		// 서비스에 가서 데이터를 받아와라!
+		model.addAttribute("board",boardService.글상세보기(id));
+		return "detail";
+	}
+	
+	
+	
 }
